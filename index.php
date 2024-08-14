@@ -19,7 +19,7 @@
       <div class="col-lg-12 mb-0 mb-lg-0" style="z-index: 10; text-align:center">
         <img src="img/ABH-LOGO-WHITE.png" alt="" style="width:20%; margin-top:-80px; margin-bottom:-30px;">
         <h1 class="my-1 display-3 fw-bold ls-light" style="color: hsl(218, 81%, 95%)">
-          CPA HN ONLINE
+          HAHAH
         </h1>
 
         <p class="text-white mt-4 h2" style="font-family:kanit";>ระบบขอเลข HN Online</p>
