@@ -7,7 +7,14 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
   <link rel="stylesheet" href="style.css">
 
-  <?php //include("connect.php"); ?>
+  <?php
+  session_start();
+
+  if (empty($_SESSION['csrf_token'])) {
+    $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
+  }
+  //include("connect.php"); 
+  ?>
 
   <title>HN Online</title>
 </head>
@@ -43,6 +50,8 @@
                   <div class="col-md-12 mb-3">
                     <div data-mdb-input-init class="form-outline">
                       <input placeholder="กรุณากรอกรหัสประจำตัวประชาชน" name="txtCid" type="text" id="form3Example1" class="form-control" required />
+                      <?php echo '<input type="hidden" name="csrf_token" value="' . $_SESSION['csrf_token'] . '">'; ?>
+
                     </div>
                   </div>
 
@@ -82,8 +91,8 @@
                       <?php
                       foreach (range(2500, 2567) as $resl) {
                       ?><option value="<?= $resl ?>"> <?= $resl ?> </option><?php
-                                                                            }
-                                                                              ?>
+                                                                          }
+                                                                            ?>
                     </select>
                   </div>
 

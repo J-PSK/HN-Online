@@ -7,9 +7,14 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
   <link rel="stylesheet" href="style.css">
 
-  <?php //include("connect.php"); 
+  <?php
+  //include("connect.php"); 
+  header('X-Frame-Options: DENY');
+  header('X-Content-Type-Options: nosniff');
+  header('X-XSS-Protection: 1; mode=block');
+  header('Strict-Transport-Security: max-age=31536000; includeSubDomains; preload');
   $timeLimit = 60;  // Time limit in seconds (e.g., 60 seconds)
-  $maxRequests = 10;  // Maximum number of requests allowed
+  $maxRequests = 15;  // Maximum number of requests allowed
 
   session_start();
   if (!isset($_SESSION['request_count'])) {
@@ -23,6 +28,12 @@
     $_SESSION['request_count']++;
   }
 
+  if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    if (!hash_equals($_SESSION['csrf_token'], $_POST['csrf_token'])) {
+      // Handle invalid CSRF token
+      die('CSRF token validation failed');
+    }
+  }
   // Check if the request count exceeds the max requests
   if ($_SESSION['request_count'] > $maxRequests) {
     // Return an error response or limit access
@@ -94,7 +105,7 @@
 
 
 
-                $txtCid = '1250100287235';
+                // $txtCid = '9999999999999';
                 require_once './vendor/autoload.php'; // path ของไฟล ืautoload.php ใน vendor
                 $dotenv = Dotenv\Dotenv::createImmutable('./'); //path ที่เก็บ ไฟล์ .env
                 $dotenv->load();
@@ -105,9 +116,24 @@
                 $stmt->execute();
                 $hisdata = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-                echo "CID : " . $txtCid . "<br>";
+                echo "HisData<br>CID : " . $txtCid . "<br>";
                 echo "HN : " . $hisdata[0]['hn'] . "<br>";
-                echo $hisdata[0]['pname'] . ' ' . $hisdata[0]['fname'] . ' ' . $hisdata[0]['lname'];
+
+                $hn = "";
+                $pname = "";
+                $fname = "";
+                $lname  = "";
+
+                if (count($hisdata) === 1) {
+                  $pname = $hisdata[0]['pname'];
+                  $fname = $hisdata[0]['fname'];
+                  $lname = $hisdata[0]['lname'];
+                  echo "ชื่อ : " . $hisdata[0]['pname'] . ' ' . $hisdata[0]['fname'] . ' ' . $hisdata[0]['lname'];
+                } else {
+                  echo "ไม่พบข้อมูล HN ของท่านในระบบของโรงพยาบาล";
+                }
+
+
 
                 // เตรียมคำสั่ง SQL
                 $txtCid;
@@ -115,7 +141,7 @@
                 @$result = $conn->query($sql);
 
                 // ตรวจสอบและแสดงผลลัพธ์
-                if ($result->num_rows > 0) {
+                if ($result->num_rows > 0 || count($hisdata) === 1) {
                   while ($row = $result->fetch_assoc()) {
 
                     $hn = $row['txtHN'];
@@ -128,7 +154,8 @@
                         <div class="fw-normal"><?php echo "โรงพยาบาลเจ้าพระยาอภัยภูเบศร ขอบคุณที่ใช้บริการ"; ?><div>
                             <div class="mt-5" style="margin-bottom:-30px;">
                               <input type="button" data-mdb-button-init data-mdb-ripple-init class="btn btn-danger btn-block" onclick="history.back();" value="กลับสู่หน้าหลัก" style="margin-top:-50px">
-                            <?php  } else { ?><div class="text-center" style="font-family:kanit">
+                            <?php  } else { ?>
+                              <div class="text-center" style="font-family:kanit">
                                 <div class="fw-normal h5"><?php echo "สวัสดีคุณ "; ?></div>
                                 <div class="fw-normal h3 text-success"><?php echo $row['txtPrename'] . $row['txtName'] . " " . $row['txtLname']; ?></div>
                                 <div class="fw-normal"><?php echo "HN ของคุณคือ"; ?></div>
@@ -371,14 +398,9 @@
 
                                     </div>
 
-
-
-
-
-
                                     <!-- <label for="">CID</label>
-                    <input class="form-control" id="disabledInput" type="text" value="<?php echo $cid; ?>" disabled>
-                     -->
+                                    <input class="form-control" id="disabledInput" type="text" value="<?php echo $cid; ?>" disabled>
+                                    -->
                                   </form>
 
 
