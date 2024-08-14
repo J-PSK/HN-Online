@@ -62,50 +62,57 @@
               <div class="row">
 
 
-
-
                 <?php
+                // error_reporting(0);
+                $txtPrename = $_POST['txtPrename'] ?? "";
+                $txtName = $_POST['txtName'] ?? "";
+                $txtLname = $_POST['txtLname'] ?? "";
+                $txtGender = $_POST['txtGender'] ?? "";
+                $txtStatus = $_POST['txtStatus'] ?? "";
+                $txtBd = $_POST['txtBd'] ?? "";
+                $txtBm = $_POST['txtBm'] ?? "";
+                $txtBy = $_POST['txtBy'] ?? "";
+                $txtCid = $_POST['txtCid'] ?? "";
+                $txtNationality = $_POST['txtNationality'] ?? "";
+                $txtReligion = $_POST['txtReligion'] ?? "";
+                $txtOccupation = $_POST['txtOccupation'] ?? "";
+                $txtEducation = $_POST['txtEducation'] ?? "";
+                $txtName2 = $_POST['txtName2'] ?? "";
+                $txtLname2 = $_POST['txtLname2'] ?? "";
+                $txtNameDad = $_POST['txtNameDad'] ?? "";
+                $txtLnameDad = $_POST['txtLnameDad'] ?? "";
+                $txtNameMom = $_POST['txtNameMom'] ?? "";
+                $txtLnameMom = $_POST['txtLnameMom'] ?? "";
+                $txtNo = $_POST['txtNo'] ?? "";
+                $txtMo = $_POST['txtMo'] ?? "";
+                $txtAlley = $_POST['txtAlley'] ?? "";
+                $txtSubDistrict = $_POST['txtSubDistrict'] ?? "";
+                $txtDistrict = $_POST['txtDistrict'] ?? "";
+                $txtProvince = $_POST['txtProvince'] ?? "";
+                $txtPostCode = $_POST['txtPostCode'] ?? "";
+                $txtTel = $_POST['txtTel'] ?? "";
 
 
 
-                error_reporting(0);
-                $txtPrename = $_POST['txtPrename'];
-                $txtName = $_POST['txtName'];
-                $txtLname = $_POST['txtLname'];
-                $txtGender = $_POST['txtGender'];
-                $txtStatus = $_POST['txtStatus'];
-                $txtBd = $_POST['txtBd'];
-                $txtBm = $_POST['txtBm'];
-                $txtBy = $_POST['txtBy'];
-                $txtCid = $_POST['txtCid'];
-                $txtNationality = $_POST['txtNationality'];
-                $txtReligion = $_POST['txtReligion'];
-                $txtOccupation = $_POST['txtOccupation'];
-                $txtEducation = $_POST['txtEducation'];
-                $txtName2 = $_POST['txtName2'];
-                $txtLname2 = $_POST['txtLname2'];
-                $txtNameDad = $_POST['txtNameDad'];
-                $txtLnameDad = $_POST['txtLnameDad'];
-                $txtNameMom = $_POST['txtNameMom'];
-                $txtLnameMom = $_POST['txtLnameMom'];
-                $txtNo = $_POST['txtNo'];
-                $txtMo = $_POST['txtMo'];
-                $txtAlley = $_POST['txtAlley'];
-                $txtSubDistrict = $_POST['txtSubDistrict'];
-                $txtDistrict = $_POST['txtDistrict'];
-                $txtProvince = $_POST['txtProvince'];
-                $txtPostCode = $_POST['txtPostCode'];
-                $txtTel = $_POST['txtTel'];
+                $txtCid = '1250100287235';
+                require_once './vendor/autoload.php'; // path ของไฟล ืautoload.php ใน vendor
+                $dotenv = Dotenv\Dotenv::createImmutable('./'); //path ที่เก็บ ไฟล์ .env
+                $dotenv->load();
+                require("./connect/connectpostgre.php");
+                $hisQuery = "SELECT cid,hn,pname,fname,lname FROM patient where cid = :cid LIMIT 1";
+                $stmt = $pdo->prepare($hisQuery);
+                $stmt->bindParam(':cid', $txtCid, PDO::PARAM_STR);
+                $stmt->execute();
+                $hisdata = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-
-
-
-                // echo "CID : ".$txtCid;
+                echo "CID : " . $txtCid . "<br>";
+                echo "HN : " . $hisdata[0]['hn'] . "<br>";
+                echo $hisdata[0]['pname'] . ' ' . $hisdata[0]['fname'] . ' ' . $hisdata[0]['lname'];
 
                 // เตรียมคำสั่ง SQL
                 $txtCid;
                 $sql = "SELECT * FROM patient WHERE txtCid = '$txtCid' ";
-                $result = $conn->query($sql);
+                @$result = $conn->query($sql);
 
                 // ตรวจสอบและแสดงผลลัพธ์
                 if ($result->num_rows > 0) {
@@ -113,29 +120,24 @@
 
                     $hn = $row['txtHN'];
                     if ($hn == 0) {
-                ?><div class="text-center" style="font-family:kanit"><?php
-                                                                      ?><div class="fw-normal h5"><?php echo "สวัสดีคุณ "; ?></div><?php
-                                                                                                                                    ?><div class="fw-normal h3 text-success"><?php echo $row['txtPrename'] . $row['txtName'] . " " . $row['txtLname']; ?></div><?php
-                                                                                                                                                                                                                                                                ?><div class="text-primary" style="font-size : 60px"><?php echo "รออนุมัติ" ?></div><?php
-                                                                                                                                                                                                                                                                                                                                                    ?><div class="fw-normal"><?php echo "โรงพยาบาลเจ้าพระยาอภัยภูเบศร ขอบคุณที่ใช้บริการ"; ?><div><?php
-                                                                                                                                                                                                                                                                                                                                                                                                                                                  ?><div class="mt-5" style="margin-bottom:-30px;"> <input type="button" data-mdb-button-init data-mdb-ripple-init class="btn btn-danger btn-block" onclick="history.back();" value="กลับสู่หน้าหลัก" style="margin-top:-50px"><?php
-
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              } else {
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                ?><div class="text-center" style="font-family:kanit"><?php
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      ?><div class="fw-normal h5"><?php echo "สวัสดีคุณ "; ?></div><?php
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          ?><div class="fw-normal h3 text-success"><?php echo $row['txtPrename'] . $row['txtName'] . " " . $row['txtLname']; ?></div><?php
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  ?><div class="fw-normal"><?php echo "HN ของคุณคือ"; ?></div><?php
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        ?><div class="text-primary" style="font-size : 100px;"><?php echo $row['txtHN']; ?></div><?php
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              ?><div class="fw-normal"><?php echo "โรงพยาบาลเจ้าพระยาอภัยภูเบศร ขอบคุณที่ใช้บริการ"; ?><div><?php
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      ?><div class="mt-5" style="margin-bottom:-30px;"> <input type="button" data-mdb-button-init data-mdb-ripple-init class="btn btn-danger btn-block" onclick="history.back();" value="กลับสู่หน้าหลัก" style="margin-top:-50px"><?php
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    }
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  }
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                } else {
-
-
-
-
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      ?>
+                ?><div class="text-center" style="font-family:kanit"><?php ?>
+                        <div class="fw-normal h5"><?php echo "สวัสดีคุณ "; ?></div>
+                        <div class="fw-normal h3 text-success"><?php echo $row['txtPrename'] . $row['txtName'] . " " . $row['txtLname']; ?></div>
+                        <div class="text-primary" style="font-size : 60px"><?php echo "รออนุมัติ" ?>
+                        </div>
+                        <div class="fw-normal"><?php echo "โรงพยาบาลเจ้าพระยาอภัยภูเบศร ขอบคุณที่ใช้บริการ"; ?><div>
+                            <div class="mt-5" style="margin-bottom:-30px;">
+                              <input type="button" data-mdb-button-init data-mdb-ripple-init class="btn btn-danger btn-block" onclick="history.back();" value="กลับสู่หน้าหลัก" style="margin-top:-50px">
+                            <?php  } else { ?><div class="text-center" style="font-family:kanit">
+                                <div class="fw-normal h5"><?php echo "สวัสดีคุณ "; ?></div>
+                                <div class="fw-normal h3 text-success"><?php echo $row['txtPrename'] . $row['txtName'] . " " . $row['txtLname']; ?></div>
+                                <div class="fw-normal"><?php echo "HN ของคุณคือ"; ?></div>
+                                <div class="text-primary" style="font-size : 100px;"><?php echo $row['txtHN']; ?></div>
+                                <div class="fw-normal"><?php echo "โรงพยาบาลเจ้าพระยาอภัยภูเบศร ขอบคุณที่ใช้บริการ"; ?><div>
+                                    <div class="mt-5" style="margin-bottom:-30px;"> <input type="button" data-mdb-button-init data-mdb-ripple-init class="btn btn-danger btn-block" onclick="history.back();" value="กลับสู่หน้าหลัก" style="margin-top:-50px">
+                                  <?php }
+                              }
+                            } else { ?>
 
                                   <form action="confirm.data.php" method="POST">
 
@@ -383,8 +385,8 @@
                                 <?php
 
 
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                }
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                $conn->close();
+                              }
+                              $conn->close();
                                 ?>
 
 
