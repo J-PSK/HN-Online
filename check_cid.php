@@ -116,29 +116,38 @@
                 $stmt->execute();
                 $hisdata = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-                echo "HisData<br>CID : " . $txtCid . "<br>";
-                echo "HN : " . $hisdata[0]['hn'] . "<br>";
+                // echo "HisData<br>CID : " . $txtCid . "<br>";
+                // echo "HN : " . $hisdata[0]['hn'] . "<br>";
 
                 $hn = "";
                 $pname = "";
                 $fname = "";
                 $lname  = "";
-
-                if (count($hisdata) === 1) {
-                  $pname = $hisdata[0]['pname'];
-                  $fname = $hisdata[0]['fname'];
-                  $lname = $hisdata[0]['lname'];
-                  echo "ชื่อ : " . $hisdata[0]['pname'] . ' ' . $hisdata[0]['fname'] . ' ' . $hisdata[0]['lname'];
+                $hn = "";
+                if (@$result->num_rows > 0) {
+                  while ($row = $result->fetch_assoc()) {
+                    $pname = $row['txtPrename'];
+                    $fname = $row['txtName'];
+                    $lname = $row['txtLname'];
+                    $hn = $row['txtHN'];
+                  }
                 } else {
-                  echo "ไม่พบข้อมูล HN ของท่านในระบบของโรงพยาบาล";
+                  if (count($hisdata) === 1) {
+                    $pname = $hisdata[0]['pname'];
+                    $fname = $hisdata[0]['fname'];
+                    $lname = $hisdata[0]['lname'];
+                    $hn    = $hisdata[0]['hn'];
+                    // echo "ชื่อ : " . $hisdata[0]['pname'] . ' ' . $hisdata[0]['fname'] . ' ' . $hisdata[0]['lname'];
+                  } else {
+                    // echo "ไม่พบข้อมูล HN ของท่านในระบบของโรงพยาบาล";
+                  }
                 }
-
 
 
                 // เตรียมคำสั่ง SQL
                 $txtCid;
                 $sql = "SELECT * FROM patient WHERE txtCid = '$txtCid' ";
-                @$result = $conn->query($sql);
+                @$result = @$conn->query($sql);
 
                 // ตรวจสอบและแสดงผลลัพธ์
                 if ($result->num_rows > 0 || count($hisdata) === 1) {
@@ -148,7 +157,7 @@
                     if ($hn == 0) {
                 ?><div class="text-center" style="font-family:kanit"><?php ?>
                         <div class="fw-normal h5"><?php echo "สวัสดีคุณ "; ?></div>
-                        <div class="fw-normal h3 text-success"><?php echo $row['txtPrename'] . $row['txtName'] . " " . $row['txtLname']; ?></div>
+                        <div class="fw-normal h3 text-success"><?php echo $pname . $fname . " " . $lname; ?></div>
                         <div class="text-primary" style="font-size : 60px"><?php echo "รออนุมัติ" ?>
                         </div>
                         <div class="fw-normal"><?php echo "โรงพยาบาลเจ้าพระยาอภัยภูเบศร ขอบคุณที่ใช้บริการ"; ?><div>
@@ -159,7 +168,7 @@
                                 <div class="fw-normal h5"><?php echo "สวัสดีคุณ "; ?></div>
                                 <div class="fw-normal h3 text-success"><?php echo $row['txtPrename'] . $row['txtName'] . " " . $row['txtLname']; ?></div>
                                 <div class="fw-normal"><?php echo "HN ของคุณคือ"; ?></div>
-                                <div class="text-primary" style="font-size : 100px;"><?php echo $row['txtHN']; ?></div>
+                                <div class="text-primary" style="font-size : 100px;"><?php echo $hn; ?></div>
                                 <div class="fw-normal"><?php echo "โรงพยาบาลเจ้าพระยาอภัยภูเบศร ขอบคุณที่ใช้บริการ"; ?><div>
                                     <div class="mt-5" style="margin-bottom:-30px;"> <input type="button" data-mdb-button-init data-mdb-ripple-init class="btn btn-danger btn-block" onclick="history.back();" value="กลับสู่หน้าหลัก" style="margin-top:-50px">
                                   <?php }

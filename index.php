@@ -49,7 +49,7 @@
                 <div class="row">
                   <div class="col-md-12 mb-3">
                     <div data-mdb-input-init class="form-outline">
-                      <input placeholder="กรุณากรอกรหัสประจำตัวประชาชน" name="txtCid" type="text" id="form3Example1" class="form-control" required />
+                      <input placeholder="กรุณากรอกรหัสประจำตัวประชาชน" minlength="13" name="txtCid" type="text" id="form3Example1" class="form-control" required />
                       <?php echo '<input type="hidden" name="csrf_token" value="' . $_SESSION['csrf_token'] . '">'; ?>
 
                     </div>
@@ -90,9 +90,8 @@
                       <option value='null' style="text-align:center;">ปีเกิด</option>
                       <?php
                       foreach (range(2500, 2567) as $resl) {
-                      ?><option value="<?= $resl ?>"> <?= $resl ?> </option><?php
-                                                                          }
-                                                                            ?>
+                      ?><option value="<?= $resl ?>"> <?= $resl ?>
+                        </option><?php   }   ?>
                     </select>
                   </div>
 
