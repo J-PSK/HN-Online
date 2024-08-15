@@ -9,7 +9,11 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
   <link rel="stylesheet" href="style.css">
 
-  <?php include("connect.php"); ?>
+  <?php
+  require_once './vendor/autoload.php'; // path ของไฟล ืautoload.php ใน vendor
+  $dotenv = Dotenv\Dotenv::createImmutable('./'); //path ที่เก็บ ไฟล์ .env
+  $dotenv->load();
+  include("connect.php"); ?>
   <!-- Auto Refresh -->
   <!-- <meta http-equiv="refresh" content="1" >  -->
 

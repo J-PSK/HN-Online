@@ -1,8 +1,9 @@
 <?php
-$servername = "172.16.28.70";
-$username = "hn10665";
-$password = "1234";
-$dbname = "abh_hn_online";
+$servername = $_ENV['MYDB_HOST'];
+$username = $_ENV['MYDB_USERNAME'];
+$password = $_ENV['MYDB_PASSWORD'];
+$port = $_ENV['MYDB_DBNAME'];
+$dbname = $_ENV['MYDB_DBNAME'];
 
 // Create connection
 $conn = new mysqli($servername, $username, $password, $dbname);

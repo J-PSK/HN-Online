@@ -8,6 +8,9 @@
   <link rel="stylesheet" href="style.css">
 
   <?php
+  require_once './vendor/autoload.php'; // path ของไฟล ืautoload.php ใน vendor
+  $dotenv = Dotenv\Dotenv::createImmutable('./'); //path ที่เก็บ ไฟล์ .env
+  $dotenv->load();
   include("connect.php");
   header('X-Frame-Options: DENY');
   header('X-Content-Type-Options: nosniff');
@@ -104,9 +107,7 @@
                 $txtTel = $_POST['txtTel'] ?? "";
 
                 $bd = $txtBy - 543 . '-' . $txtBm . '-' . $txtBd;
-                require_once './vendor/autoload.php'; // path ของไฟล ืautoload.php ใน vendor
-                $dotenv = Dotenv\Dotenv::createImmutable('./'); //path ที่เก็บ ไฟล์ .env
-                $dotenv->load();
+
                 require("./connect/connectpostgre.php");
                 $hisQuery = "SELECT cid,hn,pname,fname,lname FROM patient where cid = :cid AND birthday = :bd LIMIT 1";
                 $stmt = $pdo->prepare($hisQuery);
