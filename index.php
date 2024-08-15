@@ -57,8 +57,8 @@
 
 
                   <div class="col-md-4 mb-3">
-                    <select class="form-select" name="txtBd">
-                      <option value='null'>วันเกิด</option>
+                    <select class="form-select" name="txtBd" required>
+                      <option value=''>วันเกิด</option>
                       <?php foreach (range(1, 31) as $resl) { ?>
                         <option value="<?= $resl ?>"> <?= $resl ?> </option>
                       <?php } ?>
@@ -67,8 +67,8 @@
 
                   <div class="col-md-4 mb-3">
                     <div data-mdb-input-init class="form-outline">
-                      <Select name="txtBm" class="form-select" required>
-                        <Option value="null">เดือนเกิด</option>
+                      <select name="txtBm" class="form-select" required>
+                        <Option value="">เดือนเกิด</option>
                         <Option value="1">มกราคม</option>
                         <Option value="2">กุมภาพันธ์</option>
                         <Option value="3">มีนาคม</option>
@@ -86,8 +86,8 @@
                   </div>
 
                   <div class="col-md-4 mb-3">
-                    <select class="form-select" name="txtBy">
-                      <option value='null' style="text-align:center;">ปีเกิด</option>
+                    <select class="form-select" name="txtBy" required>
+                      <option value='' style="text-align:center;">ปีเกิด</option>
                       <?php
                       foreach (range(2500, 2567) as $resl) {
                       ?><option value="<?= $resl ?>"> <?= $resl ?>

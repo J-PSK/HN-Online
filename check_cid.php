@@ -161,7 +161,7 @@
 
                 <?php
                 // ตรวจสอบและแสดงผลลัพธ์
-                if ($result->num_rows > 0 || count($hisdata) === 1) {
+                if ($result->num_rows > 0  && count($hisdata) < 1) {
                   while ($row = $result->fetch_assoc()) {
                     $hn = $row['txtHN'];
                     if ($hn == 0) {
@@ -183,7 +183,7 @@
                                     <div class="mt-5" style="margin-bottom:-30px;"> <input type="button" data-mdb-button-init data-mdb-ripple-init class="btn btn-danger btn-block" onclick="history.back();" value="กลับสู่หน้าหลัก" style="margin-top:-50px">
                                   <?php }
                               }
-                            } else { ?>
+                            } else if (count($hisdata) < 1) { ?>
 
                                   <form action="confirm.data.php" method="POST">
 
