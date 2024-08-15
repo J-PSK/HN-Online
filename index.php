@@ -69,15 +69,15 @@
                     <div data-mdb-input-init class="form-outline">
                       <select name="txtBm" class="form-select" required>
                         <Option value="">เดือนเกิด</option>
-                        <Option value="1">มกราคม</option>
-                        <Option value="2">กุมภาพันธ์</option>
-                        <Option value="3">มีนาคม</option>
-                        <Option value="4">เมษายน</option>
-                        <Option value="5">พฤษภาคม</option>
-                        <Option value="6">มิถุนายน</option>
-                        <Option value="7">กรกฎาคม</option>
-                        <Option value="8">สิงหาคม</option>
-                        <Option value="9">กันยายน</option>
+                        <Option value="01">มกราคม</option>
+                        <Option value="02">กุมภาพันธ์</option>
+                        <Option value="03">มีนาคม</option>
+                        <Option value="04">เมษายน</option>
+                        <Option value="05">พฤษภาคม</option>
+                        <Option value="06">มิถุนายน</option>
+                        <Option value="07">กรกฎาคม</option>
+                        <Option value="08">สิงหาคม</option>
+                        <Option value="09">กันยายน</option>
                         <Option value="10">ตุลาคม</option>
                         <Option value="11">พฤศจิกายน</option>
                         <Option value="12">ธันวาคม</option>

@@ -103,16 +103,15 @@
                 $txtPostCode = $_POST['txtPostCode'] ?? "";
                 $txtTel = $_POST['txtTel'] ?? "";
 
-
-
-                // $txtCid = '9999999999999';
+                $bd = $txtBy - 543 . '-' . $txtBm . '-' . $txtBd;
                 require_once './vendor/autoload.php'; // path ของไฟล ืautoload.php ใน vendor
                 $dotenv = Dotenv\Dotenv::createImmutable('./'); //path ที่เก็บ ไฟล์ .env
                 $dotenv->load();
                 require("./connect/connectpostgre.php");
-                $hisQuery = "SELECT cid,hn,pname,fname,lname FROM patient where cid = :cid LIMIT 1";
+                $hisQuery = "SELECT cid,hn,pname,fname,lname FROM patient where cid = :cid AND birthday = :bd LIMIT 1";
                 $stmt = $pdo->prepare($hisQuery);
                 $stmt->bindParam(':cid', $txtCid, PDO::PARAM_STR);
+                $stmt->bindParam(':bd', $bd);
                 $stmt->execute();
                 $hisdata = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
