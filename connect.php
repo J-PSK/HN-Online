@@ -1,7 +1,7 @@
 <?php
 $servername = "172.16.28.70";
-$username = "root";
-$password = "4321";
+$username = "hn10665";
+$password = "1234";
 $dbname = "abh_hn_online";
 
 // Create connection

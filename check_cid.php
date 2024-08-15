@@ -8,7 +8,7 @@
   <link rel="stylesheet" href="style.css">
 
   <?php
-  include("connect.php"); 
+  include("connect.php");
   header('X-Frame-Options: DENY');
   header('X-Content-Type-Options: nosniff');
   header('X-XSS-Protection: 1; mode=block');
@@ -142,22 +142,32 @@
                     // echo "ไม่พบข้อมูล HN ของท่านในระบบของโรงพยาบาล";
                   }
                 }
-
-
                 // เตรียมคำสั่ง SQL
                 $txtCid;
                 $sql = "SELECT * FROM patient WHERE txtCid = '$txtCid' ";
                 @$result = @$conn->query($sql);
 
+                if ($hn != 0) {
+                ?>
+                  <div class="text-center" style="font-family:kanit">
+                    <div class="fw-normal h5"><?php echo "สวัสดีคุณ "; ?></div>
+                    <div class="fw-normal h3 text-success"><?php echo $pname . $fname . " " . $lname; ?></div>
+                    <div class="fw-normal"><?php echo "HN ของคุณคือ"; ?></div>
+                    <div class="text-primary" style="font-size : 100px;"><?php echo $hn; ?></div>
+                    <div class="fw-normal"><?php echo "โรงพยาบาลเจ้าพระยาอภัยภูเบศร ขอบคุณที่ใช้บริการ"; ?></div>
+                    <div class="mt-5" style="margin-bottom:-30px;"> <input type="button" data-mdb-button-init data-mdb-ripple-init class="btn btn-danger btn-block" onclick="history.back();" value="กลับสู่หน้าหลัก" style="margin-top:-50px"> </div>
+                  </div>
+                <?php } ?>
+
+                <?php
                 // ตรวจสอบและแสดงผลลัพธ์
                 if ($result->num_rows > 0 || count($hisdata) === 1) {
                   while ($row = $result->fetch_assoc()) {
-
                     $hn = $row['txtHN'];
                     if ($hn == 0) {
                 ?><div class="text-center" style="font-family:kanit"><?php ?>
                         <div class="fw-normal h5"><?php echo "สวัสดีคุณ "; ?></div>
-                        <div class="fw-normal h3 text-success"><?php echo $pname . $fname . " " . $lname; ?></div>
+                        <div class="fw-normal h3 text-success"><?php echo $row['txtPrename'] . $row['txtName'] . " " . $row['txtLname']; ?></div>
                         <div class="text-primary" style="font-size : 60px"><?php echo "รออนุมัติ" ?>
                         </div>
                         <div class="fw-normal"><?php echo "โรงพยาบาลเจ้าพระยาอภัยภูเบศร ขอบคุณที่ใช้บริการ"; ?><div>
