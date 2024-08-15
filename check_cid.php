@@ -8,7 +8,7 @@
   <link rel="stylesheet" href="style.css">
 
   <?php
-  //include("connect.php"); 
+  include("connect.php"); 
   header('X-Frame-Options: DENY');
   header('X-Content-Type-Options: nosniff');
   header('X-XSS-Protection: 1; mode=block');
