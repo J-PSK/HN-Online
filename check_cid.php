@@ -420,13 +420,16 @@
 
 
                           } else { ?>
+                              <div style="font-family: kanit;" class="text-center">
                               <div class="fw-normal h5"><?php echo "สวัสดีคุณ "; ?></div>
                               <div class="fw-normal h3 text-success"><?php echo $pname . $fname . " " . $lname; ?></div>
                               <div class="fw-normal"><?php echo "HN ของคุณคือ"; ?></div>
-                              <div class="text-primary" style="font-size : 100px;"><?php echo $hn; ?></div>
+                              <div class="text-primary" style="font-size : 60px;"><?php echo $hn; ?></div>
                               <div class="fw-normal"><?php echo "โรงพยาบาลเจ้าพระยาอภัยภูเบศร ขอบคุณที่ใช้บริการ"; ?></div>
                               <div class="mt-5" style="margin-bottom:-30px;"> <input type="button" data-mdb-button-init data-mdb-ripple-init class="btn btn-danger btn-block" onclick="history.back();" value="กลับสู่หน้าหลัก" style="margin-top:-50px"></div>
-                            <?php } ?>
+                              </div>
+                            
+                              <?php } ?>
 
                             <?php
                             $conn->close();
