@@ -62,6 +62,8 @@
                 $txtEducation = $_POST['txtEducation'];
                 $txtName2 = $_POST['txtName2'];
                 $txtLname2 = $_POST['txtLname2'];
+                $txtName3 = $_POST['txtName3'];
+                $txtLname3 = $_POST['txtLname3'];
                 $txtNameDad = $_POST['txtNameDad'];
                 $txtLnameDad = $_POST['txtLnameDad'];
                 $txtNameMom = $_POST['txtNameMom'];
@@ -76,9 +78,33 @@
                 $txtTel = $_POST['txtTel'];
 
 
+                $p = $conn->query("SELECT * FROM prename WHERE prename_id = '".$txtPrename."' ");  
+                $rowP = $p->fetch_assoc();
+                $prename = $rowP['prename_name'];
+
+                $s = $conn->query("SELECT * FROM status WHERE status_id = '".$txtStatus."' ");  
+                $rowS = $s->fetch_assoc();
+                $status = $rowS['status_name'];
+
+                $n = $conn->query("SELECT * FROM nation WHERE nation_id = '".$txtNationality."' ");  
+                $rowN = $n->fetch_assoc();
+                $nation = $rowN['nation_name'];
+
+                $r = $conn->query("SELECT * FROM reg WHERE reg_id = '".$txtReligion."' ");  
+                $rowR = $r->fetch_assoc();
+                $reg = $rowR['reg_name'];
+
+                $e = $conn->query("SELECT * FROM edu WHERE edu_id = '".$txtEducation."' ");  
+                $rowE = $e->fetch_assoc();
+                $edu = $rowE['edu_name'];
+                
+
+
                 ?>
 
                 <form action="add.data.php" method="POST">
+
+        
 
                   <div class="h1 text-center text-primary " style="margin-top:-20px; font-family:kanit;">ตรวจสอบข้อมูล</div>
                   <div class="h3 " style="font-family:kanit;">ข้อมูลส่วนบุคคล</div>
@@ -90,7 +116,8 @@
                     <div class="col-md-3 mb-2">
                       <label for="basic-url" class="form-label"> คำนำหน้า</label>
                       <div class="input-group mb-2">
-                        <input name="txtPrename" readonly type="text" value="<?php echo $txtPrename; ?>" class="form-control" id="basic-url" aria-describedby="basic-addon3">
+                        <input name="txtPrename" readonly type="hidden" value="<?php echo $txtPrename; ?>" class="form-control" id="basic-url" aria-describedby="basic-addon3">
+                        <input name="prename" readonly type="text" value="<?php echo $prename; ?>" class="form-control" id="basic-url" aria-describedby="basic-addon3">
                       </div>
                     </div>
 
@@ -116,7 +143,8 @@
                     <div class="col-md-4 mb-2">
                       <label for="basic-url" class="form-label">สถานภาพ</label>
                       <div class="input-group mb-2">
-                        <input name="txtStatus" readonly type="text" value="<?php echo $txtStatus; ?>" class="form-control" id="basic-url" aria-describedby="basic-addon3">
+                        <input name="txtStatus" readonly type="hidden" value="<?php echo $txtStatus; ?>" class="form-control" id="basic-url" aria-describedby="basic-addon3">
+                        <input name="status" readonly type="text" value="<?php echo $status; ?>" class="form-control" id="basic-url" aria-describedby="basic-addon3">
                       </div>
                     </div>
 
@@ -151,18 +179,21 @@
                     <div class="col-md-3 mb-2">
                       <label for="basic-url" class="form-label">สัญชาติ</label>
                       <div class="input-group mb-2">
-                        <input name="txtNationality" readonly type="text" value="<?php echo $txtNationality; ?>" class="form-control" id="basic-url" aria-describedby="basic-addon3">
+                        <input name="txtNationality" readonly type="hidden" value="<?php echo $txtNationality; ?>" class="form-control" id="basic-url" aria-describedby="basic-addon3">
+                        <input name="nation" readonly type="text" value="<?php echo $nation; ?>" class="form-control" id="basic-url" aria-describedby="basic-addon3">
                       </div>
-                    </div>
+                      </div>
+                    
                     <div class="col-md-3 mb-2">
                       <label for="basic-url" class="form-label">ศาสนา</label>
                       <div class="input-group mb-2">
-                        <input name="txtReligion" readonly type="text" value="<?php echo $txtReligion; ?>" class="form-control" id="basic-url" aria-describedby="basic-addon3">
+                        <input name="txtReligion" readonly type="hidden" value="<?php echo $txtReligion; ?>" class="form-control" id="basic-url" aria-describedby="basic-addon3">
+                        <input name="reg" readonly type="text" value="<?php echo $reg; ?>" class="form-control" id="basic-url" aria-describedby="basic-addon3">
                       </div>
                     </div>
 
                     <div class="col-md-12 mb-2">
-                      <label for="basic-url" class="form-label">อิเมลล์</label> <label class="text-danger"> *</label>
+                      <label for="basic-url" class="form-label">อิเมลล์</label>
                       <div class="input-group mb-2">
                         <input name="txtEmail" readonly type="email" value="<?php echo $txtEmail; ?>" class="form-control" id="basic-url" aria-describedby="basic-addon3">
                       </div>
@@ -180,7 +211,8 @@
                     <div class="col-md-6 mb-2">
                       <label for="basic-url" class="form-label">วุฒิการศึกษา</label>
                       <div class="input-group mb-2">
-                        <input name="txtEducation" readonly type="text" value="<?php echo $txtEducation; ?>" class="form-control" id="basic-url" aria-describedby="basic-addon3">
+                        <input name="txtEducation" readonly type="hidden" value="<?php echo $txtEducation; ?>" class="form-control" id="basic-url" aria-describedby="basic-addon3">
+                        <input name="edu" readonly type="text" value="<?php echo $edu; ?>" class="form-control" id="basic-url" aria-describedby="basic-addon3">
                       </div>
                     </div>
 
@@ -220,6 +252,19 @@
                       <label for="basic-url" class="form-label">นามสกุลมารดา (ผู้ป่วย)</label>
                       <div class="input-group mb-2">
                         <input name="txtLnameMom" readonly type="text" value="<?php echo $txtLnameMom; ?>" class="form-control" id="basic-url" aria-describedby="basic-addon3">
+                      </div>
+                    </div>
+
+                    <div class="col-md-6 mb-0">
+                      <label for="basic-url" class="form-label">ชื่อ ผู้ที่ติดต่อได้</label>
+                      <div class="input-group mb-2">
+                        <input name="txtName3" readonly type="text" value="<?php echo $txtName3; ?>" class="form-control" id="basic-url" aria-describedby="basic-addon3">
+                      </div>
+                    </div>
+                    <div class="col-md-6 mb-0">
+                      <label for="basic-url" class="form-label">นามสกุล ผู้ที่ติดต่อได้</label>
+                      <div class="input-group mb-2">
+                        <input name="txtLname3" readonly type="text" value="<?php echo $txtLname3; ?>" class="form-control" id="basic-url" aria-describedby="basic-addon3">
                       </div>
                     </div>
                   </div>
@@ -283,7 +328,8 @@
 
                     <div class="col-md-12  mb-2 mt-5">
 
-                      <input type="button" data-mdb-button-init data-mdb-ripple-init class="btn btn-danger btn-block" onclick="history.back();" value="แก้ไขข้อมูล" style="margin-top:-50px">
+                      <!-- <input type="button" data-mdb-button-init data-mdb-ripple-init class="btn btn-danger btn-block" onclick="history.back();" value="แก้ไขข้อมูล" style="margin-top:-50px"> -->
+                      <input type="button" data-mdb-button-init data-mdb-ripple-init class="btn btn-danger btn-block" onclick="window.location.href='check_cid.php';" value="กลับสู่หน้าหลัก" style="margin-top:-50px">
 
                       <button type="submit" data-mdb-button-init data-mdb-ripple-init class="btn btn-success btn-block mb-0" style="margin-top:-50px;">
                         ยืนยันข้อมูล

@@ -72,7 +72,8 @@
                 เข้าสู่ระบบ
               </button>
               <!-- <input type="button" data-mdb-button-init data-mdb-ripple-init class="btn btn-danger btn-block mt-2" onclick="history.back();" value="กลับสู่หน้าหลัก" style="margin-top:-50px"> -->
-              <div class="mt-5" style="margin-bottom:-30px;"> <input type="button" data-mdb-button-init data-mdb-ripple-init class="btn btn-danger btn-block" onclick="location.href='index.php'" value="กลับสู่หน้าหลัก" style="margin-top:-50px">
+              <div class="mt-5" style="margin-bottom:-30px; margin-top:-20px;"> <input type="button" data-mdb-button-init data-mdb-ripple-init class="btn btn-danger btn-block" 
+              onclick="location.href='index.php'" value="กลับสู่หน้าหลัก" style="margin-top:-50px">
 
 
               </div>

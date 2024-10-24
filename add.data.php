@@ -93,7 +93,7 @@
                     <div class="fw-normal h2 text-primary"><?php echo $txtPrename . $txtName . " " . $txtLname; ?></div>
                     <div class="fw-normal"><?php echo "เราได้รับข้อมูลของท่านเรียบร้อยแล้ว"; ?></div>
                     <div class="fw-normal"><?php echo "เราจะดำเนินการส่ง Email ยืนยันให้คุณ เมื่อระบบได้ทำการอนุมัติเลข HN เรียบร้อยแล้ว"; ?></div>
-                    <div class="mt-5" style="margin-bottom:-30px;"> <input type="button" data-mdb-button-init data-mdb-ripple-init class="btn btn-danger btn-block" onclick="location.href='index.html'" value="กลับสู่หน้าหลัก" style="margin-top:-50px"></div>
+                    <div class="mt-5 mb-2 " style="margin-bottom:-30px;"> <input type="button" data-mdb-button-init data-mdb-ripple-init class="btn btn-danger btn-block" onclick="location.href='index.php'" value="กลับสู่หน้าหลัก" style="margin-top:-50px"></div>
                     <div class="fw-light"><?php echo "โรงพยาบาลเจ้าพระยาอภัยภูเบศร ขอบคุณที่ใช้บริการ"; ?></div>
                   <?php
                 }
